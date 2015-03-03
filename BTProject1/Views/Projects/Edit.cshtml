@@ -1,0 +1,70 @@
+﻿@model BTProject.Models.ProjectViewModel
+@{
+    ViewBag.Title = "AssignUserRole";
+
+}
+
+<h2>Assign Users to Project</h2>
+<div>
+    @Html.ActionLink("Back to List", "Index", "Projects")
+</div>
+<div class="col-md-6">
+    @using (Html.BeginForm(null, null, FormMethod.Post,
+    new { encType = "multipart/form-data", name = "myform" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-sm-6">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.Name)
+            </div>
+
+            <div class="form-group col-sm-12">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                <div class="">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                @Html.LabelFor(model => model.NewlyAssignedUsers, htmlAttributes: new { @class = "control-label" })<br />
+                <div class="">
+                    @Html.ListBoxFor(model => model.NewlyAssignedUsers, Model.PossibleUsersToAssign as MultiSelectList, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PossibleUsersToAssign, "", new { @class = "text-danger" })
+                    @if (ViewBag.Message != null)
+                    {
+                        <br />
+                        <div class="text-danger">@ViewBag.Message</div>
+                    }
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                @Html.LabelFor(model => model.PossibleUsersToRemove, htmlAttributes: new { @class = "control-label" })
+                <div class="">
+                    @Html.ListBoxFor(model => model.NewlyRemovedUsers, Model.PossibleUsersToRemove as MultiSelectList, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PossibleUsersToRemove, "", new { @class = "text-danger" })
+                    @if (ViewBag.Message != null)
+                    {
+                        <br />
+                        <div class="text-danger">@ViewBag.Message</div>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Submit Changes" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

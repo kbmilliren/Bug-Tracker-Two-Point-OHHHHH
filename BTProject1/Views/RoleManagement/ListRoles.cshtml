@@ -1,0 +1,30 @@
+﻿@using BTProject1.Models
+
+@model IEnumerable<RoleViewModel>
+
+@{
+    ViewBag.Title = "ListRoles";
+}
+
+<h2>System Roles</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RoleName)
+        </th>
+        <th></th>
+    </tr>
+   
+     @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleName)
+            </td>
+            <td>
+                @Html.ActionLink("Assign", "AssignUserRole", new { roleid = item.RoleId }) |
+                @Html.ActionLink("Unassign", "UnassignUserRole", new { roleid = item.RoleId })
+            </td>
+        </tr>
+    }
+</table>
