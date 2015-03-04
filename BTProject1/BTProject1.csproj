@@ -626,6 +626,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\favicon.ico" />
     <Content Include="js\flot-data.js" />
     <Content Include="js\morris-data.js" />
     <Content Include="pages\blank.html" />

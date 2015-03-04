@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using BTProject.Models;
+using BTProject1.Models;
 using BTProject1.Models;
 
 namespace BTProject1.Controllers
@@ -116,20 +116,7 @@ namespace BTProject1.Controllers
             return RedirectToAction("Edit", new { Id = model.Id });
 
         }
-        /*
-        // GET: /Account/AssignUserRole
-        [Authorize(Roles = "Administrator")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AssignProjectUser(ProjectUserViewModel model)
-        {
-
-            return RedirectToAction("Edit", new { Id = model.Id });
-
-        }
-        */
-
-        // GET: Projects/Delete/5
+      
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -163,36 +150,5 @@ namespace BTProject1.Controllers
             }
             base.Dispose(disposing);
         }
-        /*
-        // GET: /Account/AssignUserRole
-        [Authorize(Roles = "Administrator")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AssignProjectUser(Project model)
-        {
-            foreach (var userId in model.NewlyRemovedUsers)
-            {
-                var tempUser = new ApplicationUser();
-                tempUser.Id = userId;
-                db.Users.Attach(tempUser);
-                db.Entry(tempUser).State = EntityState.Deleted;
-            }
-            
-
-            foreach (var userId in model.NewlyAssignedUsers)
-            {
-                var tempUser = new ApplicationUser();
-                tempUser.Id = userId;
-                db.Users.Attach(tempUser);
-                db.Entry(tempUser).State = EntityState.Added;
-            }
-
-            db.SaveChanges();
-
-            return RedirectToAction("Edit", new { Id = model.Id });
-
-        }
-        */
-
     }
 }

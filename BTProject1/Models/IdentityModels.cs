@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using BTProject.Models;
+using BTProject1.Models;
 using System.Collections.Generic;
 
 namespace BTProject1.Models

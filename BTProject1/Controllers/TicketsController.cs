@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using BTProject.Models;
 using BTProject1.Models;
 using Microsoft.AspNet.Identity;
 
@@ -141,18 +140,18 @@ namespace BTProject1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Comment([Bind(Include = "PostId, Message")] TicketComment comment)
+        public ActionResult AddComment([Bind(Include = "TicketId,Comment")] TicketComment addition)
         {
             if (ModelState.IsValid)
             {
-                comment.UserId = User.Identity.GetUserId();
-                comment.DateCreated = System.DateTimeOffset.Now;
-                db.TicketComments.Add(comment);
+                addition.AssignedUserId = User.Identity.GetUserId();
+                addition.DateCreated = System.DateTimeOffset.Now;
+                db.TicketComments.Add(addition);
                 db.SaveChanges();
-                return RedirectToAction("Details", new { Ticket = comment.Ticket });
+                return RedirectToAction("Details", new { Id = addition.TicketId });
             }
 
-            return View(comment);
+            return RedirectToAction("Details", new { Id = addition.TicketId });
         }
     }
 }

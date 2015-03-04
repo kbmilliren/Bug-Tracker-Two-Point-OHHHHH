@@ -1,6 +1,6 @@
 namespace BTProject1.Migrations
 {
-    using BTProject.Models;
+    using BTProject1.Models;
     using BTProject1.Models;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;

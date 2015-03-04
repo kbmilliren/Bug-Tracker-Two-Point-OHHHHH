@@ -12,8 +12,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    
 
-    <title>Bad Ass Bug Tracker</title>
+
+    <link rel="shortcut icon" href="~/Images/favicon.ico">   
+    <title>Bug Tracker</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="~/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -86,9 +89,13 @@
                                     <li>
                                         <a href="/Tickets/Index">Tickets</a>
                                     </li>
-                                    <li>
-                                        <a href="/RoleManagement/ListRoles">Roles</a>
-                                    </li>
+                                    @if (User.IsInRole("Administrator"))
+                                    {
+                                        <li>
+                                            <a href="/RoleManagement/ListRoles">Roles</a>
+                                        </li>
+                                    }
+                                    
                                 </ul>
                                 <!-- /.nav-second-level -->
                         </ul>

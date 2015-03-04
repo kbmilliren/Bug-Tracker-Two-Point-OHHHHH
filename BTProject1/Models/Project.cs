@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BTProject.Models
+namespace BTProject1.Models
 {
     public class Project
     {

@@ -1,4 +1,4 @@
-﻿@model BTProject.Models.Ticket
+﻿@model BTProject1.Models.Ticket
 
 @{
     ViewBag.Title = "Details";
@@ -108,6 +108,17 @@
 
     </dl>
 </div>
+<div class="well">
+    <h4>Leave a Comment:</h4>
+    <form action="/Tickets/AddComment" method="post">
+        <div class="form-group">
+            @Html.Hidden("TicketId", Model.Id)
+            @Html.AntiForgeryToken()
+            <textarea class="form-control" rows="3" name="Comment"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
 @foreach (var comment in Model.Comments)
 {
     <div class="media">
@@ -119,8 +130,6 @@
             @Html.Raw(comment.Comment)
         </div>
     </div>
-
-
 }
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
