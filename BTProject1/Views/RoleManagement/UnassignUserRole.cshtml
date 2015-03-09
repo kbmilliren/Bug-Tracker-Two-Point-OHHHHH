@@ -1,9 +1,4 @@
-﻿@model BTProject1.Models.RoleViewModel
-
-@{
-    ViewBag.Title = "UnassignUserRole";
-   
-}
+﻿@model BTProject1.Models.UserRoleViewModel
 
 <h2>@(Model.RoleName + "s")</h2>
 @using (Html.BeginForm("UnassignUserRole", "RoleManagement", FormMethod.Post,
@@ -16,6 +11,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.RoleId)
         @Html.HiddenFor(model => model.RoleName)
+       
         <div class="form-group">
             @Html.LabelFor(model => model.Users, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

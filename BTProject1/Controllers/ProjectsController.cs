@@ -150,5 +150,21 @@ namespace BTProject1.Controllers
             }
             base.Dispose(disposing);
         }
+
+        /*[HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddComment([Bind(Include = "ProjectId,Comment")] ProjectComment addition)
+        {
+            if (ModelState.IsValid)
+            {
+                addition.AssignedUserId = User.Identity.GetUserId();
+                addition.DateCreated = System.DateTimeOffset.Now;
+                db.ProjectComments.Add(addition);
+                db.SaveChanges();
+                return RedirectToAction("Details", new { Id = addition.ProjectId });
+            }
+
+            return RedirectToAction("Details", new { Id = addition.ProjectId });
+        }*/
     }
 }

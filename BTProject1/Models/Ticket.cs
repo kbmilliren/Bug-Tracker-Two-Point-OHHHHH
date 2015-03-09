@@ -25,6 +25,7 @@ namespace BTProject1.Models
         public int AssignedToUserId { get; set; }
         public string SubmitterId { get; set; }
         public string AssignedUserId { get; set; }
+        public string MediaUrl { get; set; }
 
         public virtual Project Project { get; set; }
         public virtual ApplicationUser Submitter { get; set; }

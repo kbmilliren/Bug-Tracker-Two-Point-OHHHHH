@@ -83,12 +83,16 @@
                             <li>
                                 <a href="/Projects/Index" class="active"><i class="fa fa-bar-chart-o fa-fw"></i> Bug Tracker<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
-                                    <li>
-                                        <a href="/Projects/Index">Projects</a>
-                                    </li>
-                                    <li>
-                                        <a href="/Tickets/Index">Tickets</a>
-                                    </li>
+                                    @if (User.IsInRole("User"))
+                                    {
+                                        <li>
+                                            <a href="/Projects/Index">Projects</a>
+                                        </li>
+                                        <li>
+                                            <a href="/Tickets/Index">Tickets</a>
+                                        </li>
+                                    }
+                                  
                                     @if (User.IsInRole("Administrator"))
                                     {
                                         <li>
