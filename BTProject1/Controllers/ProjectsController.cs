@@ -7,7 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BTProject1.Models;
-using BTProject1.Models;
+using PagedList;
+using PagedList.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace BTProject1.Controllers
 {
@@ -16,9 +18,18 @@ namespace BTProject1.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Projects
-        public ActionResult Index()
+
+        public ActionResult Index(int? page, string query)
         {
-            return View(db.Projects.ToList());
+            var projects = db.Projects.AsQueryable();
+            if (!String.IsNullOrWhiteSpace(query))
+            {
+                projects = projects.Where(p => p.Name.Contains(query));
+                ViewBag.Query = query;
+
+            }
+            projects = projects.OrderByDescending(p => p.Name);
+            return View(projects.ToPagedList(page ?? 1, 3));
         }
 
         // GET: Projects/Details/5
@@ -52,6 +63,7 @@ namespace BTProject1.Controllers
             if (ModelState.IsValid)
             {
                 db.Projects.Add(project);
+                project.DateCreated = DateTimeOffset.Now;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -166,5 +178,7 @@ namespace BTProject1.Controllers
 
             return RedirectToAction("Details", new { Id = addition.ProjectId });
         }*/
+  
     }
 }
+

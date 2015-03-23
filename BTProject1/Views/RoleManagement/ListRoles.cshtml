@@ -7,24 +7,29 @@
 }
 
 <h2>System Roles</h2>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.RoleName)
-        </th>
-        <th></th>
-    </tr>
-   
-     @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoleName)
-            </td>
-            <td>
-                @Html.ActionLink("Assign", "AssignUserRole", new { roleid = item.RoleId }) |
-                @Html.ActionLink("Unassign", "UnassignUserRole", new { roleid = item.RoleId })
-            </td>
-        </tr>
-    }
-</table>
+<div class="row">
+    <div class="col-md-6">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.RoleName)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoleName)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-default">@Html.ActionLink("Assign", "AssignUserRole", new { roleid = item.RoleId }) </button>
+                        <button type="button" class="btn btn-default">@Html.ActionLink("Unassign", "UnassignUserRole", new { roleid = item.RoleId })</button>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+</div>

@@ -5,13 +5,16 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using BTProject1.Models;
 using System.Collections.Generic;
+using System.Web.Script.Serialization;
 
 namespace BTProject1.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        [ScriptIgnore]
         public virtual ICollection<Ticket> Tickets { get; set; }
+        [ScriptIgnore]
         public virtual ICollection<Project> Projects { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -38,6 +41,7 @@ namespace BTProject1.Models
         public DbSet<Project> Projects { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<TicketAttachment> TicketAttachments { get; set; }
+        //public DbSet<ProjectComment> ProjectComments { get; set; }
         public DbSet<TicketComment> TicketComments { get; set; }
         public DbSet<TicketHistory> TicketHistories { get; set; }
         public DbSet<TicketNotification> TicketNotification { get; set; }

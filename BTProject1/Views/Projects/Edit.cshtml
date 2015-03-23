@@ -6,7 +6,7 @@
 
 <h2>Assign Users to Project</h2>
 <div>
-    @Html.ActionLink("Back to List", "Index", "Projects")
+   <button type="button" class="btn btn-default">@Html.ActionLink("Back to List", "Index", "Projects")</button> 
 </div>
 <div class="col-md-6">
     @using (Html.BeginForm(null, null, FormMethod.Post,
@@ -20,7 +20,6 @@
                 @Html.HiddenFor(model => model.Id)
                 @Html.HiddenFor(model => model.Name)
             </div>
-
             <div class="form-group col-sm-12">
                 @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
                 <div class="">

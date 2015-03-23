@@ -64,15 +64,34 @@ namespace BTProject1.Migrations
             {
                 context.TicketStatuses.Add(new TicketStatus { Name = "New" });
             }
-
-            if (!context.TicketPriorities.Any(t=>t.Name == "New"))
+            if (!context.TicketStatuses.Any(t => t.Name == "Active"))
             {
-                context.TicketPriorities.Add(new TicketPriority { Name = "New" });
+                context.TicketStatuses.Add(new TicketStatus { Name = "Active" });
+            }
+            if (!context.TicketStatuses.Any(t => t.Name == "Resolved"))
+            {
+                context.TicketStatuses.Add(new TicketStatus { Name = "Resolved" });
+            }
+            if (!context.TicketPriorities.Any(t=>t.Name == "Low"))
+            {
+                context.TicketPriorities.Add(new TicketPriority { Name = "Low" });
+            }
+            if (!context.TicketPriorities.Any(t => t.Name == "High"))
+            {
+                context.TicketPriorities.Add(new TicketPriority { Name = "High" });
+            }
+            if (!context.TicketPriorities.Any(t => t.Name == "Urgent"))
+            {
+                context.TicketPriorities.Add(new TicketPriority { Name = "Urgent" });
             }
 
-            if (!context.TicketTypes.Any(t => t.Name == "New" ))
+            if (!context.TicketTypes.Any(t => t.Name == "Bug" ))
             {
-                context.TicketTypes.Add(new TicketType { Name = "New" });
+                context.TicketTypes.Add(new TicketType { Name = "Bug" });
+            }
+            if (!context.TicketTypes.Any(t => t.Name == "Enhancment"))
+            {
+                context.TicketTypes.Add(new TicketType { Name = "Enhancment" });
             }
 
             context.SaveChanges();

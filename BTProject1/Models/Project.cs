@@ -14,13 +14,17 @@ namespace BTProject1.Models
         {
             Tickets = new HashSet<Ticket>();
             ApplicationUsers = new HashSet<ApplicationUser>();
+            //Comments = new HashSet<ProjectComment>();
         }
 
         public string Name { get; set; }
         public int Id { get; set; }
+        public DateTimeOffset DateCreated { get; set; }
 
         public virtual ICollection<Ticket> Tickets { get; set; }
         public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; }
+       /* public virtual ICollection<ProjectComment> Comments { get; set; }*/
+       
     }
 
     [Bind(Exclude="PossibleUsersToAssign,PossibleUsersToRemove")]
@@ -29,10 +33,13 @@ namespace BTProject1.Models
 
         public string Name { get; set; }
         public int Id { get; set; }
+        public DateTimeOffset DateCreated { get; set; }
 
         public MultiSelectList PossibleUsersToAssign { get; set; }
         public string[] NewlyAssignedUsers { get; set; }
         public MultiSelectList PossibleUsersToRemove { get; set; }
         public string[] NewlyRemovedUsers { get; set; }
     }
+
+
 }

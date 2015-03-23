@@ -7,46 +7,50 @@
 
 }
 
-<h2>Assign Users to Project</h2>
-
-@using (Html.BeginForm("AssignUserRole", "RoleManagement", FormMethod.Post,
+<h2>Assign Users</h2>
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm("AssignUserRole", "RoleManagement", FormMethod.Post,
     new { encType = "multipart/form-data", name = "myform" }))
-{
-    @Html.AntiForgeryToken()
+        {
+            @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.RoleId)
-        @Html.HiddenFor(model => model.RoleName)
-        <div class="form-group">
-            @Html.LabelFor(model => model.RoleName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RoleName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
-                @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.RoleId)
+                @Html.HiddenFor(model => model.RoleName)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RoleName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.RoleName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Users, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.ListBoxFor(model => model.SelectedUsers, Model.Users as MultiSelectList, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Users, "", new { @class = "text-danger" })
+                        @if (ViewBag.Message != null)
+                        {
+                            <br />
+                            <div class="text-danger">@ViewBag.Message</div>
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Add User(s)" class="btn btn-default" />
+                    </div>
+                </div>
             </div>
+        }
+        <div>
+            <button type="button" class="btn btn-default">@Html.ActionLink("Back to List", "ListRoles", "RoleManagement")</button> 
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Users, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.ListBoxFor(model => model.SelectedUsers, Model.Users as MultiSelectList, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Users, "", new { @class = "text-danger" })
-                @if (ViewBag.Message != null)
-                {
-                    <br />
-                    <div class="text-danger">@ViewBag.Message</div>
-                }
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Add User(s)" class="btn btn-default" />
-            </div>
-        </div>
+
     </div>
-}
-<div>
-    @Html.ActionLink("Back to List", "ListRoles", "RoleManagement")
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

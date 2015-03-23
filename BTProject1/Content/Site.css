@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 0px;
     padding-bottom: 20px;
 }
 
@@ -20,5 +20,35 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    /*max-wi*/
 }
+
+.blue {
+    color: #337ab7;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+/*.navbar-default {
+    background-color: #bbd0f0;
+    background-image: url('../Images/27268.jpg');
+    color:Background
+    
+}
+
+.navbar-default .navbar-brand
+{
+  color:white
+}
+
+.navbar-default .navbar-brand:hover
+{
+  color:white
+}*/
+

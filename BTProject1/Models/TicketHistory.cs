@@ -14,7 +14,7 @@ namespace BTProject1.Models
         public string OldValue { get; set; }
         public string NewValue { get; set; }
         public DateTimeOffset DateChanged { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         public virtual Ticket Ticket { get; set; }
         public virtual ApplicationUser AssignedUser { get; set; }
