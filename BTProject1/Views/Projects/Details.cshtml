@@ -4,61 +4,30 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Project Details</h2>
 
-<div>
-    <h4>Project</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DateCreated)
-        </dd>
-    </dl>
+<div class="content overflow-hidden">
+    <div class="col-md-8">
+        <div class="well">
+            <h5 style="padding:1px; color:#816bb1"><strong> Project Name: @Model.Name</strong><span class="pull-right">Created On @Model.DateCreated.ToString("MMMM dd yyyy")</span></h5>
+        </div>
+    </div>
 </div>
 <p>
     <div class="btn-group" role="group" aria-label="...">
-        <button type="button" class="btn btn-default">@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) </button>
+        @if (User.IsInRole("Administrator"))
+        {
+            <button type="button" class="btn btn-default">@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) </button>
+        }
+        @if (User.IsInRole("Project Manager"))
+        {
+            <button type="button" class="btn btn-default">@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) </button>
+        }
         <button type="button" class="btn btn-default">@Html.ActionLink("Back to List", "Index")</button>
     </div>
  
     
 </p>
 <br/>
-@* @foreach (var comment in Model.Comments)
-    <div class="col-md-4">
-        <div class="well">
-            <h4>Leave a Comment:</h4>
-            <form action="/Tickets/AddComment" method="post">
-                <div class="form-group">
-                    @Html.Hidden("TicketId", Model.Id)
-                    @Html.AntiForgeryToken()
-                    <textarea class="form-control" rows="3" name="Comment"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
 
-        {
-            <div class="media">
-                <div class="media-body">
-                    <h4 class="media-heading">
-                        @comment.AssignedUser.UserName
-                        <small>@comment.DateCreated.DateTime.ToLongDateString()</small>
-                    </h4>
-                    @Html.Raw(comment.Comment)
-                </div>
-            </div>
-        }*@
-
-</div>
  

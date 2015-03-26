@@ -68,7 +68,7 @@ namespace BTProject1.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl = "/Home/Index")
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl = "/Dashboard/Index")
         {
             if (!ModelState.IsValid)
             {

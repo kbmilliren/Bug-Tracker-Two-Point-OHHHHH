@@ -10,6 +10,7 @@ using System.Data.Entity;
 
 namespace BTProject1.Controllers
 {
+    [Authorize]
     public class RoleManagementController : Controller
     {
         private ApplicationDbContext db;

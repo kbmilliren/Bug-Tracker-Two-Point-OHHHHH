@@ -1,0 +1,162 @@
+﻿@model BTProject1.Models.DashboardViewModel
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Dashboard</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-comments fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">
+                            @Html.DisplayFor(model => model.numUsers)
+                        </div>
+                        <div>Active Users!</div>
+                    </div>
+                </div>
+            </div>
+            <a href="/RoleManagement/ListRoles">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-tasks fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">
+                            @Html.DisplayFor(model => model.numProjects)
+                        </div>
+                        <div>Active Projects!</div>
+                    </div>
+                </div>
+            </div>
+            <a href="/Projects">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-support fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">
+                            @Html.DisplayFor(model => model.numTickets)
+                        </div>
+                        <div>Active Tickets!</div>
+                    </div>
+                </div>
+            </div>
+            <a href="/Tickets">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<h2>Most Recent Tickets</h2>
+<table id="table_id" class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Assigned To User</th>
+            <th>Project</th>
+            <th>Submitter</th>          
+            <th>Created</th>
+            <th>Updated</th>
+            <th>Type</th>
+            <th>Priority</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.recentTickets)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.Raw(item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AssignedUser.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Project.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Submitter.Email)
+                    </td>
+               
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateCreated)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateUpdated)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Priority.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status.Name)
+                    </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", "Tickets", new { id = item.Id }, null) 
+                        @if (User.IsInRole("Administrator"))
+                        {
+
+                            @Html.ActionLink("Delete", "Delete", "Tickets", new { id = item.Id }, null)
+                        }
+                        </td>
+                    </tr>
+                }
+    </tbody>
+
+</table>
+
+@section Scripts
+{
+
+    <script>
+        $(document).ready(function () {
+            $('#table_id').dataTable();
+          
+        });
+    </script>
+    
+
+}

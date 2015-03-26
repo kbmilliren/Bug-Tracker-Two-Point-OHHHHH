@@ -1,7 +1,6 @@
 namespace BTProject1.Migrations
 {
     using BTProject1.Models;
-    using BTProject1.Models;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
@@ -89,9 +88,9 @@ namespace BTProject1.Migrations
             {
                 context.TicketTypes.Add(new TicketType { Name = "Bug" });
             }
-            if (!context.TicketTypes.Any(t => t.Name == "Enhancment"))
+            if (!context.TicketTypes.Any(t => t.Name == "Enhancement"))
             {
-                context.TicketTypes.Add(new TicketType { Name = "Enhancment" });
+                context.TicketTypes.Add(new TicketType { Name = "Enhancement" });
             }
 
             context.SaveChanges();

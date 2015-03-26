@@ -1,6 +1,7 @@
 ﻿using BTProject1.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,9 +17,11 @@ namespace BTProject1.Models
 
         public int Id { get; set; }
         public string Title { get; set; }
+        [AllowHtml]
+        [Required]
         public string Description { get; set; }
         public DateTimeOffset DateCreated { get; set; }
-        public DateTimeOffset? DateUpdated { get; set; }
+        public Nullable <DateTimeOffset> DateUpdated { get; set; }
         public int ProjectId { get; set; }
         public int TicketTypeId { get; set; }
         public int TicketPriorityId { get; set; }
@@ -56,7 +59,7 @@ namespace BTProject1.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTimeOffset DateCreated { get; set; }
-        public DateTimeOffset? DateUpdated { get; set; }
+        public Nullable <DateTimeOffset> DateUpdated { get; set; }
         public string ProjectId { get; set; }
         public string TicketType { get; set; }
         public string TicketPriority { get; set; }
@@ -79,7 +82,7 @@ namespace BTProject1.Models
             TicketType = ticket.Type.Name;
             TicketPriority = ticket.Priority.Name;
             TicketStatus = ticket.Status.Name;
-            SubmitterId = ticket.SubmitterId != null ? ticket.AssignedUser.UserName : "";; 
+            SubmitterId = ticket.Submitter != null ? ticket.Submitter.UserName : "";; 
             AssignedUserId = ticket.AssignedUserId;
             MediaUrl = ticket.MediaUrl;
 

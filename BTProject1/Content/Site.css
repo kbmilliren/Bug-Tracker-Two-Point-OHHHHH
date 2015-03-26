@@ -34,21 +34,46 @@ textarea {
 .green {
     color: green;
 }
-
-/*.navbar-default {
-    background-color: #bbd0f0;
-    background-image: url('../Images/27268.jpg');
-    color:Background
-    
+.navbar-default {
+   
+   color: #b0bed9;
 }
-
+/*
 .navbar-default .navbar-brand
 {
-  color:white
+  color:red;
+  margin-right:15px;
+  margin-right:15px;
+  width: 251px
 }
 
 .navbar-default .navbar-brand:hover
 {
-  color:white
+  color:red;
+}
+
+.navbar-top-links li:last-child {
+margin:0;
+background-color: #f8f8f8
+
 }*/
 
+.navbar-brand{
+    padding: 0px 25px;
+    
+}
+.form-horizontal .form-group
+{
+    margin-right: 30px;
+}
+.jumbotron {
+    padding: 100px;
+    background-color:#337ab7;
+    color: white;
+   
+}
+.scroll
+{
+    max-height: 200px;
+    overflow: scroll;
+}

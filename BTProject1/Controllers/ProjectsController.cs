@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 
 namespace BTProject1.Controllers
 {
+    [Authorize]
     public class ProjectsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

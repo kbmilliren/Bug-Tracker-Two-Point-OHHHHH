@@ -173,6 +173,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
@@ -192,6 +193,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DashboardViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Project.cs" />
@@ -705,10 +707,14 @@
     <Content Include="Images\27268.jpg" />
     <Content Include="Images\4a05c65102d4bbcb07c0f782a7fb65a6 %281%29.jpg" />
     <Content Include="Images\4a05c65102d4bbcb07c0f782a7fb65a6.jpg" />
+    <Content Include="Images\8izKe66zT.jpg" />
     <Content Include="Images\a-spiderweb-with-spider-vector-1014112.jpg" />
     <Content Include="Images\favicon.ico" />
     <Content Include="Images\sf1005-spiderandweb.gif" />
+    <Content Include="Images\spider-web005.jpg" />
     <Content Include="Images\Spider.png" />
+    <Content Include="Images\SpiderWeb.jpg" />
+    <Content Include="Images\SpiderWeb.png" />
     <Content Include="Images\Spider_Web.png" />
     <Content Include="Images\ws_Grey_spider%27s_web_2560x1600.jpg" />
     <Content Include="js\flot-data.js" />
@@ -1258,8 +1264,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -1306,6 +1310,7 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.json" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

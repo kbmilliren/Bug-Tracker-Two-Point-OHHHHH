@@ -4,199 +4,195 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Ticket Details</h2>
 
-<div>
-    <h4>Ticket</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.AssignedUser)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AssignedUser.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Project)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Project.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Submitter)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Submitter.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateCreated)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateUpdated)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateUpdated)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Type.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Priority)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Priority.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status.Name)
-        </dd>
-
-
-    </dl>
-</div>
-<br/>
-<div class="btn-group" role="group" aria-label="...">
-    <p>
-        <button type="button" class="btn btn-default">@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) </button>
-        @if (User.IsInRole("Administrator"))
-        {
-            <button type="button" class="btn btn-default">@Html.ActionLink("Delete", "Delete", new { id = Model.Id }) </button>
-        }
-
-        <button type="button" class="btn btn-default">@Html.ActionLink("Back to List", "Index")</button>
-    </p>
-</div>
-
-<br/>
-
-
+<style>
+    p {
+        display: inline;
+    }
+</style>
 
 <div class="row">
-    <div class="col-md-6">
-        <div class="well">
-            <h4>Leave a Comment:</h4>
-            <form action="/Tickets/AddComment" method="post">
-                <div class="form-group">
-                    @Html.Hidden("TicketId", Model.Id)
-                    @Html.AntiForgeryToken()
-                    <textarea class="form-control" rows="3" name="Comment"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
-
-        @foreach (var comment in Model.Comments)
-        {
-            <div class="media">
-                <div class="media-body">
-                    <h4 class="media-heading">
-                        @comment.AssignedUser.UserName
-                        <small>@comment.DateCreated.DateTime.ToLongDateString()</small>
-                    </h4>
-                    @Html.Raw(comment.Comment)
+    <div class="col-md-8">
+        <div class="block-flat">
+            <div class="header">
+                <h3>Ticket Title : @Model.Title </h3>
+                <div class="alert-block" style="padding:3px">
+                    <h5 style="padding:1px; color:#816bb1"><strong> By @Model.Submitter.Email</strong><span class="pull-right">Posted On @Model.DateCreated.ToString("MMMM dd yyyy")</span></h5>
+                    <h5 style="padding:1px; color:#816bb1"><strong> Assigned To: @if(Model.AssignedUser != null){@Model.AssignedUser.Email}</strong></h5> 
                 </div>
             </div>
-        }
-    </div>
-    <div class="col-md-6">
-        <div class="well">
-            <h4>Add Attachment:</h4>
-            <form action="/Tickets/AddAttachment" method="post" enctype="multipart/form-data">
-                <div class="form-group col-md-12">
-                    @Html.Hidden("TicketId", Model.Id)
-                    @Html.AntiForgeryToken()
-                    <textarea class="form-control" rows="2" name="Description" style="height:50px;" placeholder="Description"></textarea>
-                    <input type="file" name="image" />
+            <div class="content overflow-hidden">
+                <div class="well">
+                    <h4>Ticket Description:</h4>
+                    @Html.Raw(@Model.Description)
+                    <br/>
+                  
+                    
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
-        @foreach (var attachment in Model.Attachments)
-        {
-        @attachment.Description
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-        View Attachment
-        </button>
-        <div class="modal fade" id="myModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Modal title</h4>
-                    </div>
-                    <div class="modal-body">
-                        <img src="@attachment.FileUrl" class="img-responsive" align="middle" />
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-        <br/>
-        } 
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h2>History</h2>
-            @foreach (var history in Model.History)
-            {
-                <div>
-                    Ticket property <span class="blue">@history.Property</span> changed from <span class="red">@history.OldValue</span> to <span class="green">@history.NewValue</span> on @history.DateChanged.DateTime.ToShortDateString() 
-                </div>  
-            }
+            </div>
         </div>
     </div>
+    <div class="col-md-4">
+            <div class="header">
+                <div class="pull-right actions">
+                </div>
+                <h3>Ticket Information</h3>
+            </div>
+            <div class="content">
+                <div class="well">
+                    <div class="icon"><i class="fa fa-server"><strong>  Type: @Model.Type.Name</strong></i></div>
+                    <strong></strong>
+                </div>
+                <div class="well">
+                    <div class="icon"><i class="fa fa-line-chart"><strong>  Priority : @Model.Priority.Name</strong></i></div>
+                    
+                </div>
+                <div class="well">
+                    <div class="icon"><i class="fa fa-life-ring"><strong>  Status : @Model.Status.Name</strong></i></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+             
+        <br />
+        <div class="btn-group" role="group" aria-label="...">
+            <p>
+              
+                
+                <button type="button" class="btn btn-default">@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) </button>
+                
+                
+                @if (User.IsInRole("Administrator"))
+                {
+                    <button type="button" class="btn btn-default">@Html.ActionLink("Delete", "Delete", new { id = Model.Id }) </button>
+                }
+
+                <button type="button" class="btn btn-default">@Html.ActionLink("Back to List", "Index")</button>
+            </p>
+        </div>
+
+        <br />
+
+
+
+
+
+<div role="tabpanel">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#history" aria-controls="history" role="tab" data-toggle="tab">History</a></li>
+        <li role="presentation"><a href="#comments" aria-controls="comments" role="tab" data-toggle="tab">Comments</a></li>
+        <li role="presentation"><a href="#attachments" aria-controls="attachments" role="tab" data-toggle="tab">Attachments</a></li>
+
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="history">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2>History</h2>
+                        @foreach (var history in Model.History)
+                        {
+                            <div>
+                                Ticket property <span class="blue">@history.Property</span> changed from <span class="red">@history.OldValue</span> to <span class="green">@Html.Raw(history.NewValue)</span> on @history.DateChanged.DateTime.ToShortDateString()
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="comments">
+            <div class="well">
+                <div class="scroll">
+                    @foreach (var comment in Model.Comments)
+                    {
+                        <div class="media">
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    @comment.AssignedUser.UserName
+                                    <small>@comment.DateCreated.DateTime.ToLongDateString()</small>
+                                </h4>
+                                @Html.Raw(comment.Comment)
+                            </div>
+                        </div>
+                    }
+                </div>
+                <h4>Leave a Comment:</h4>
+                <form action="/Tickets/AddComment" method="post">
+                    <div class="form-group">
+                        @Html.Hidden("TicketId", Model.Id)
+                        @Html.AntiForgeryToken()
+                        <textarea class="form-control" rows="3" name="Comment"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+
+            
+        </div>
+        <div role="tabpanel" class="tab-pane" id="attachments">
+            <div class="well">
+                <div class="scroll">
+                    @foreach (var attachment in Model.Attachments)
+                    {
+                        <h4>@attachment.Description</h4>
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#@attachment.Id">
+                            View Attachment
+                        </button>
+                        <div class="modal fade" id="@attachment.Id">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">@attachment.Description</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="@attachment.FileUrl" class="img-responsive" align="middle" />
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+                        <br />
+                    }
+                </div>
+                <h4>Add Attachment:</h4>
+                <form action="/Tickets/AddAttachment" method="post" enctype="multipart/form-data">
+                    <div class="form-group col-md-12">
+                        @Html.Hidden("TicketId", Model.Id)
+                        @Html.AntiForgeryToken()
+                        <textarea class="form-control" rows="2" name="Description" style="height:50px;" placeholder="Description"></textarea>
+                        <input type="file" name="image" />
+                        <span class="red">@ViewBag.AttachError</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            
+        </div>
+        <div role="tabpanel" class="tab-pane" id="settings">...</div>
+    </div>
+
 </div>
 
-@section Scripts
+                @section Scripts
 {
-<script>
-    $('#myModal').on('shown.bs.modal', function () {
-        $('#myInput').focus()
-    })
-</script>
+                    <script>
+                        $('#myModal').on('shown.bs.modal', function () {
+                            $('#myInput').focus()
+                        })
+                        $('#myTab a').click(function (e) {
+                            e.preventDefault()
+                            $('#myTab a[href="#history"]').tab('show')
+                            $('#myTab a[href="#comments"]').tab('show')
+                            $('#myTab a[href="#attachments"]').tab('show')
+                        })
+                    </script>
 
-}
-            
+
+                }

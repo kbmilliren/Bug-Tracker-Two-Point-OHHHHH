@@ -15,6 +15,7 @@ using System.Net.Mail;
 
 namespace BTProject1.Controllers
 {
+    [Authorize]
     public class TicketsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -51,6 +52,8 @@ namespace BTProject1.Controllers
                     || t.Project.Name.Contains(search) || t.Submitter.Email.Contains(search) || t.Status.Name.Contains(search) || t.Priority.Name.Contains(search)
                     || t.AssignedUser.Email.Contains(search));
             }
+
+            tickets = tickets.OrderByDescending(t => t.DateCreated);
 
             var column = requestParameters.Columns.FirstOrDefault(r => r.IsOrdered == true);
             if (column != null)
@@ -122,13 +125,14 @@ namespace BTProject1.Controllers
                     }
             }
 
-            var paged = tickets.Take(requestParameters.Length).ToList().Select(t => new TicketViewModel(t));
+            var paged = tickets.Skip(requestParameters.Start).Take(requestParameters.Length).ToList().Select(t => new TicketViewModel(t));
             return Json(new DataTablesResponse(requestParameters.Draw, paged, tickets.Count(), totalCount));
         }
 
         // GET: Tickets/Details/5
         public ActionResult Details(int? id)
         {
+           
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -138,6 +142,10 @@ namespace BTProject1.Controllers
             {
                 return HttpNotFound();
             }
+
+            if (TempData["AttachError"] != null)
+                ViewBag.AttachError = TempData["AttachError"];
+
             return View(ticket);
         }
 
@@ -167,6 +175,7 @@ namespace BTProject1.Controllers
 
 
                 db.Tickets.Add(ticket);
+                ticket.DateCreated = DateTimeOffset.Now;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -232,8 +241,8 @@ namespace BTProject1.Controllers
                     {
                         Property = "AssignedUser",
                         DateChanged = DateTimeOffset.Now,
-                        OldValue = old_ticket.AssignedUserId,
-                        NewValue = ticket.AssignedUserId,
+                        OldValue = db.Users.Find(old_ticket.AssignedUserId).Email,
+                        NewValue = db.Users.Find(ticket.AssignedUserId).Email,
                         TicketId = ticket.Id,
                         UserId = userId
                     });
@@ -302,7 +311,7 @@ namespace BTProject1.Controllers
                     {
                         Property = "Priority",
                         DateChanged = DateTimeOffset.Now,
-                        OldValue = old_ticket.Status.Name,
+                        OldValue = old_ticket.Priority.Name,
                         NewValue = db.TicketPriorities.FirstOrDefault(p => p.Id == ticket.TicketPriorityId).Name,
                         TicketId = ticket.Id,
                         UserId = userId
@@ -316,15 +325,17 @@ namespace BTProject1.Controllers
                     {
                         Property = "Type",
                         DateChanged = DateTimeOffset.Now,
-                        OldValue = old_ticket.Status.Name,
-                        NewValue = db.TicketPriorities.FirstOrDefault(p => p.Id == ticket.TicketTypeId).Name,
+                        OldValue = old_ticket.Type.Name,
+                        NewValue = db.TicketTypes.FirstOrDefault(p => p.Id == ticket.TicketTypeId).Name,
                         TicketId = ticket.Id,
                         UserId = userId
                     });
 
                 }
+
                 ticket.DateUpdated = DateTimeOffset.Now;
                 db.Entry(ticket).State = EntityState.Modified;
+                db.Entry(ticket).Property(p => p.DateCreated).IsModified = false;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -404,7 +415,7 @@ namespace BTProject1.Controllers
                     {
                         var fileName = Path.GetFileName(image.FileName);
                         var fileExtension = Path.GetExtension(fileName);
-                        if ((fileExtension == ".jpg") || (fileExtension == ".gif") || (fileExtension == ".png"))
+                        if ((fileExtension == ".jpg") || (fileExtension == ".gif") || (fileExtension == ".jpeg") || (fileExtension == ".png"))
                         {
                             var path = Server.MapPath("~/Uploads/Attachments/");
                             if (!Directory.Exists(path))

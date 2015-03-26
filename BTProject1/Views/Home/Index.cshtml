@@ -1,83 +1,106 @@
 ﻿
-@if (!User.IsInRole("User"))
-{
-    Response.Redirect("/Account/Login");
-}
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Dashboard</h1>
+
+<div class="col-md-12">
+    <div class="jumbotron">
+            <text class="text-center">
+                <h1>Spider Web Bug Tracker</h1>
+                <h2>Spider Web is a software bug and enhancment tracking software.</h2>
+                <p>Demo the software as one of the four user types by clicking the links below</p>
+            </text>
         </div>
-        <!-- /.col-lg-12 -->
+        
+        <div class="center">
+            <div class="col-md-3">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                {
+                    <fieldset>
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+
+                            @Html.Hidden("Email", "admin@info.com", new { @class = "form-control" })
+
+                        </div>
+                        <div class="form-group">
+
+                            @Html.Hidden("Password", "Std982582!", new { @class = "form-control" })
+
+                        </div>
+                        <input type="hidden" name="RememberMe" value="true" checked />
+                        <button class="btn btn-primary center-block btn-lg" type="submit" role="button">Administrator</button>
+                    </fieldset>
+                }
+            </div>
+            <div class="col-md-3">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                {
+                    <fieldset>
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+
+                            @Html.Hidden("Email", "pm@info.com", new { @class = "form-control" })
+
+                        </div>
+                        <div class="form-group">
+
+                            @Html.Hidden("Password", "Std982582!", new { @class = "form-control" })
+
+                        </div>
+                        <input type="hidden" name="RememberMe" value="true" checked />
+                        <button class="btn btn-primary center-block btn-lg" type="submit" role="button">Project Manager</button>
+                    </fieldset>
+                }
+            </div>
+            <div class="col-md-3">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                {
+                    <fieldset>
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+
+                            @Html.Hidden("Email", "developer@info.com", new { @class = "form-control" })
+
+                        </div>
+                        <div class="form-group">
+
+                            @Html.Hidden("Password", "Std982582!", new { @class = "form-control" })
+
+                        </div>
+                        <input type="hidden" name="RememberMe" value="true" checked />
+                        <button class="btn btn-primary center-block btn-lg" type="submit" role="button">Developer</button>
+                    </fieldset>
+                }
+            </div>
+            <div class="col-md-3">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                {
+                    <fieldset>
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+
+                            @Html.Hidden("Email", "submitter@info.com", new { @class = "form-control" })
+
+                        </div>
+                        <div class="form-group">
+
+                            @Html.Hidden("Password", "Std982582!", new { @class = "form-control" })
+
+                        </div>
+                        <input type="hidden" name="RememberMe" value="true" checked />
+                        <button class="btn btn-primary center-block btn-lg" type="submit" role="button">Submitter</button>
+                    </fieldset>
+                }
+            </div>
+        </div>
+       
     </div>
-    <!-- /.row -->
-    <div class="row">
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-comments fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">26</div>
-                            <div>Active Users!</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="/RoleManagement/ListRoles">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-green">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-tasks fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">
-                              12
-                            </div>
-                            <div>Active Projects!</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="/Projects">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-red">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-support fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">13</div>
-                            <div>Active Tickets!</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="/Tickets">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
+
+
+   
+ 
+        
+
+
+
+
   
+

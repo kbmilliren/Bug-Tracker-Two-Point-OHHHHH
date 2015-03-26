@@ -72,7 +72,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Spider Web</a>
+                <a class="navbar-brand" href="/Dashboard/"><h3>Spider Web</h3></a>
             </div>
             <!-- /.navbar-header -->
             
@@ -87,16 +87,16 @@
                             <li>
                                 <a href="/Projects/Index" class="active"><i class="fa fa-bug fa-2x"></i> Bug Tracker<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
-                                    @if (User.IsInRole("User"))
-                                    {
+                                  
+                                    
                                         <li>
                                             <a href="/Projects/Index"><i class="fa fa-briefcase fa-lg"></i> Projects </a>
                                         </li>
                                         <li>
                                             <a href="/Tickets/Index"><i class="fa fa-ticket fa-lg"></i> Tickets </a>
                                         </li>
-                                    }
-                                  
+                                    
+                                   
                                     @if (User.IsInRole("Administrator"))
                                     {
                                         <li>

@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Tickets</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -85,6 +85,8 @@
     $(document).ready(function () {
 
         function formatDate(obj) {
+            if (obj == null)
+                return null;
             var dx = new Date(parseInt(obj.substr(6)));
             var dd = dx.getDate();
             var mm = dx.getMonth() + 1;
@@ -117,6 +119,7 @@
            {
                "data": "DateUpdated",
                "render": formatDate
+            
            },
            { "data": "AssignedToUser" },
            { "data": "ProjectId" },

@@ -24,6 +24,7 @@ namespace BTProject1.Models
         public virtual ICollection<Ticket> Tickets { get; set; }
         public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; }
        /* public virtual ICollection<ProjectComment> Comments { get; set; }*/
+
        
     }
 
