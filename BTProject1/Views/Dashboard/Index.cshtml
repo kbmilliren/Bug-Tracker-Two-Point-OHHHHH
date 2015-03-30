@@ -104,7 +104,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Title)
+                        @Html.ActionLink(item.Title, "Details", "Tickets", new { id = item.Id}, null)
                     </td>
                     <td>
                         @Html.Raw(item.Description)
@@ -120,10 +120,13 @@
                     </td>
                
                     <td>
-                        @Html.DisplayFor(modelItem => item.DateCreated)
+                        @item.DateCreated.DateTime.Date.ToShortDateString()
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.DateUpdated)
+                        @{
+                            var t = item.DateUpdated != null ? item.DateUpdated.Value.DateTime.Date.ToShortDateString() : "";
+                            @t
+                         }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Type.Name)
@@ -134,15 +137,8 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Status.Name)
                     </td>
-                        <td>
-                            @Html.ActionLink("Details", "Details", "Tickets", new { id = item.Id }, null) 
-                        @if (User.IsInRole("Administrator"))
-                        {
-
-                            @Html.ActionLink("Delete", "Delete", "Tickets", new { id = item.Id }, null)
-                        }
-                        </td>
-                    </tr>
+           
+                 </tr>
                 }
     </tbody>
 

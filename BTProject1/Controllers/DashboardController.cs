@@ -18,12 +18,19 @@ namespace BTProject1.Controllers
         public ActionResult Index()
         {
             var user = db.Users.Find(User.Identity.GetUserId());
-
+            var userId = user.Id;
             var model = new DashboardViewModel();
 
             var recentTickets = db.Tickets.OrderByDescending(d => d.DateUpdated).Take(10);
 
-       
+            if (User.IsInRole("Administrator"))
+                recentTickets = db.Tickets.OrderByDescending(d => d.DateUpdated).Take(10);
+            else if (User.IsInRole("Project Manager"))
+                recentTickets = user.Projects.SelectMany(t => t.Tickets).AsQueryable();
+            else if (User.IsInRole("Developer"))
+                recentTickets = db.Tickets.Where(p => p.AssignedUserId == userId);
+            else recentTickets = db.Tickets.Where(p => p.SubmitterId == userId);
+           
             model.numTickets = db.Tickets.Count(t => t.Status.Name == "Active");
             
 
