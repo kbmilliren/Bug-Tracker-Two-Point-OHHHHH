@@ -44,28 +44,12 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Name)
+                            @Html.ActionLink(item.Name, "Details", "Projects", new { id = item.Id }, null)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.DateCreated)
+                            @item.DateCreated.DateTime.Date.ToShortDateString()
                         </td>
-                        <td>
-                            @if (User.IsInRole("Administrator"))
-                            {
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) 
-                      
-                            }
-                            @if (User.IsInRole("Project Manager"))
-                            {
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) 
-                            }
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }) 
-                            @if (User.IsInRole("Administrator"))
-                            {
-                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                            }
-                            
-                        </td>
+                    
                     </tr>
                 }
             </tbody>
@@ -86,6 +70,10 @@
 {
 
     <script>
+    $.extend($.fn.dataTable.defaults, {
+            searching: false,
+            paging: false,
+        });
     $(document).ready(function () {
         $('#project_table').DataTable();
     });
