@@ -149,7 +149,12 @@
 
     <script>
         $(document).ready(function () {
-            $('#table_id').dataTable();
+            $('#table_id').dataTable
+            ({
+                "dom": 'rt'
+            });
+                        
+            
           
         });
     </script>
